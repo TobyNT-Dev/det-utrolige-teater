@@ -98,46 +98,62 @@ export const Login = () => {
 )
 }
 const StyledLoginButton = styled.button`
-cursor: pointer;
-background-color: #FFFFFF00;
-border: none;
-font-size: 1.2em;
-margin-left: 2vw;
-color: #30454C;
-font-family: 'Titillium Web', sans-serif;
-text-decoration: none;
-&:hover {
+@media only screen and (min-width: 600px) {
+  cursor: pointer;
+  background-color: #FFFFFF00;
+  border: none;
+  font-size: 1.5vw;
+  margin-left: 2vw;
+  color: #30454C;
+  font-family: 'Titillium Web', sans-serif;
+  text-decoration: none;
+  &:hover {
     color: #D39D5B;
+  }
+}
+@media only screen and (max-width: 600px) {
+  cursor: pointer;
+  background-color: #FFFFFF00;
+  border: none;
+  font-size: 1.5vw;
+  margin-left: 0vw;
+  color: #30454C;
+  font-family: 'Titillium Web', sans-serif;
+  text-decoration: none;
+  &:hover {
+    color: #D39D5B;
+  }
 }
 `
 
 // Styles for the StyledLogin styled component.
 const StyledLogin = styled.div`
-overflow: hidden;
-position: absolute;
-top: 0;
-left: 0;
-.login-box {
+@media only screen and (min-width: 600px) {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  .login-box {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.387);
     backdrop-filter: blur(5px);
     form {
-        width: 20vw;
-        margin: 10vw 39vw;
-        padding: 1vw;
-        background-color: #AD7A51;
-        display: inline-block;
-        .exit {
-          user-select: none;
-          padding: 0;
-          line-height: 1vw;
-          color: white;
-          margin: 0 0 0.5vw 0;
-          width: 100%;
-          text-align: right;
-          height: 1vw;
-          font-size: 1.3vw;
+      width: 20vw;
+      margin: 10vw 39vw;
+      padding: 1vw;
+      background-color: #AD7A51;
+      display: inline-block;
+      .exit {
+        user-select: none;
+        padding: 0;
+        line-height: 1vw;
+        color: white;
+        margin: 0 0 0.5vw 0;
+        width: 100%;
+        text-align: right;
+        height: 1vw;
+        font-size: 1.3vw;
           cursor: pointer;
         }
         .error {
@@ -152,36 +168,113 @@ left: 0;
           color: white;
           align-items: center;
           font-size: 1.2vw;
-            .FormInput {
-                border-radius: 3px;
-                margin: 0.5vw;
-                border: none;
-                font-size: 1vw;
-                &:focus {
-                    outline: none !important;
-                }
+          .FormInput {
+            border-radius: 3px;
+            margin: 0.5vw;
+            border: none;
+            font-size: 1vw;
+            &:focus {
+              outline: none !important;
             }
+          }
         }
         button {
           width: 6vw;
-            padding: 0.5vw 1vw;
-            color: white;
-            display: block;
-            margin: 0 auto;
-            border-radius: 3px;
-            border: none;
-            font-size: 1.3vw;
-            transition: 200ms;
-            background-color: #61E692;
-            &:focus {
-                outline: none !important;
+          padding: 0.5vw 1vw;
+          color: white;
+          display: block;
+          margin: 0 auto;
+          border-radius: 3px;
+          border: none;
+          font-size: 1.3vw;
+          transition: 200ms;
+          background-color: #61E692;
+          &:focus {
+            outline: none !important;
             }
             &:hover {
               transition: 200ms;
               cursor: pointer;
               color: white;
             }
+          }
         }
+      }
     }
-}
-`
+//Mobile Specific styles
+@media only screen and (max-width: 600px) {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: -8vw;
+  .login-box {
+    width: 100vw;
+    height: 30vh;
+    background-color: none;
+    backdrop-filter: none;
+    form {
+      width: 80vw;
+      margin: 0;
+      padding: 3vw;
+      background-color: #AD7A51;
+      display: inline-block;
+      height: 35vw;
+      .exit {
+        user-select: none;
+        line-height: 5vw;
+        color: white;
+        margin: 0 0 0.5vw 0;
+        width: 100%;
+        text-align: right;
+        height: 5vw;
+        font-size: 5vw;
+          cursor: pointer;
+        }
+        .error {
+          color: red;
+          font-family: 'Titillium Web', sans-serif;
+          font-weight: bold;
+          font-size: 3vw;
+        }
+        label {
+          display: flex;
+          justify-content: space-between;
+          font-family: 'Titillium Web', sans-serif;
+          color: white;
+          align-items: center;
+          font-size: 4vw;
+          .FormInput {
+            border-radius: 3px;
+            margin: 0.5vw;
+            border: none;
+            font-size: 4vw;
+            &:focus {
+              outline: none !important;
+            }
+          }
+        }
+        button {
+          width: 20vw;
+          padding: 0.5vw 1vw;
+          color: white;
+          display: block;
+          margin: 0 auto;
+          border-radius: 3px;
+          border: none;
+          font-size: 5vw;
+          transition: 200ms;
+          background-color: #61E692;
+          &:focus {
+            outline: none !important;
+            }
+            &:hover {
+              transition: 200ms;
+              cursor: pointer;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+    `
