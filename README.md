@@ -1,5 +1,5 @@
 # Det Utrolige Teater
-##Tobias Thy
+## Tobias Thy
 
 ## Technologies Used
 React.js // Javascript, HTML, CSS // Styled Components
