@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Login = () => {
         // useState variables declared here ↓
-  // Logged in or not, and does "user" allready exist in the sessionstorage.
+  // Logged in or not, does "user" allready exist in the sessionstorage.
   const [loggedIn, setLoggedIn ] = useState(sessionStorage.getItem("user") !== null)
   // Login form opened, or not.
   const [initialized, setInitialized] = useState(false)
@@ -108,7 +109,7 @@ export const Login = () => {
         </form>
     </div></StyledLogin> : <></>}
     {/* If loggedIn is not true, then display a Log In button. If it is true, display a Log Out button. */}
-    {!loggedIn ? <button className="nav-button" onClick={() => setInitialized(true)}>Log In</button> : <button className="nav-button" onClick={() => logOut()}>Log Out</button>}
+    {!loggedIn ? <button className="nav-button" onClick={() => setInitialized(true)}>Log In</button> : <Link to="min-side">MIN SIDE</Link>}
   </>
 )
 }
@@ -128,10 +129,8 @@ left: 0;
         width: 20vw;
         margin: 10vw 39vw;
         padding: 1vw;
-        background-color: rgb(16, 16, 16);
+        background-color: #AD7A51;
         display: inline-block;
-        border-radius: 5px;
-        box-shadow: black 3px 3px 10px;
         .exit {
           user-select: none;
           padding: 0;
@@ -168,14 +167,14 @@ left: 0;
         button {
           width: 6vw;
             padding: 0.5vw 1vw;
-            color: lightgrey;
+            color: white;
             display: block;
             margin: 0 auto;
             border-radius: 3px;
             border: none;
             font-size: 1.3vw;
             transition: 200ms;
-            background-color: black;
+            background-color: #61E692;
             &:focus {
                 outline: none !important;
             }

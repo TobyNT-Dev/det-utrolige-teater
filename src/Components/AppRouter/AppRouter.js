@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom"
 import { Actors } from "../../Pages/Actors/Actors"
 import { Events } from "../../Pages/Events/Events"
 import { Home } from "../../Pages/Home/Home"
+import { MyPage } from "../../Pages/MyPage/MyPage"
 import { Footer } from "../Footer/Footer"
 import { Navbar } from "../Navbar/Navbar"
 
@@ -15,6 +16,7 @@ export const AppRouter = () => {
             <Route path="/" element={<Home />} />
             <Route path="/forestillinger-og-events" element={<Events />} />
             <Route path="/skuespillere" element={<Actors />} />
+            <Route path="/min-side" element={<MyPage />} />
         </Routes>
         {/* shows the footer on every page */}
         <Footer />
