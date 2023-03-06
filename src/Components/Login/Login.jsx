@@ -46,7 +46,7 @@ export const Login = () => {
         // Clear inputs, and display the error message in the form.
         setUsername("")
         setPassword("")
-        setError("User not found")
+        setError("Ingen brugere med disse kriterier blev fundet...")
       }
     })
     // If an error was to happen, then return error message in console.
@@ -78,14 +78,14 @@ export const Login = () => {
               {/* If the "x" is clicked, then set initialized to false, which hides the login form. */}
               <p className="exit" onClick={() => setInitialized(false)}>✖</p>
         <label>
-        Username:
+        Brugernavn:
         {/* Run the handleUsernameChange function when username input is changed. */}
-            <input required type="text" value={username} onChange={handleUsernameChange} />
+            <input className="FormInput" required type="text" value={username} onChange={handleUsernameChange} />
         </label>
         <label>
-        Password:
+        Adgangskode:
         {/* Run the handlePasswordChange function when password input is changed. */}
-            <input required type="password" value={password} onChange={handlePasswordChange} />
+            <input className="FormInput" required type="password" value={password} onChange={handlePasswordChange} />
         </label>
         {/* If error value is not empty, then display the error message - and if it is, display a br tag instead.  */}
         {error !== "" ? <p className="error">{error}</p> : <br />}
@@ -101,7 +101,7 @@ const StyledLoginButton = styled.button`
 cursor: pointer;
 background-color: #FFFFFF00;
 border: none;
-font-size: 1em;
+font-size: 1.2em;
 margin-left: 2vw;
 color: #30454C;
 font-family: 'Titillium Web', sans-serif;
@@ -142,16 +142,17 @@ left: 0;
         }
         .error {
           color: red;
-          font-family: sans-serif;
+          font-family: 'Titillium Web', sans-serif;
+          font-weight: bold;
         }
         label {
           display: flex;
-          font-family: sans-serif;
+          justify-content: flex-end;
+          font-family: 'Titillium Web', sans-serif;
           color: white;
-          justify-content: space-between;
           align-items: center;
           font-size: 1.2vw;
-            input {
+            .FormInput {
                 border-radius: 3px;
                 margin: 0.5vw;
                 border: none;

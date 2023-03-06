@@ -34,6 +34,7 @@ width: 100%;
     color: #30454C;
     font-family: 'Titillium Web', sans-serif;
     font-size: 1.2vw;
+    z-index: -1;
 }
 .Logo {
     width: 20vw;
@@ -44,7 +45,7 @@ width: 100%;
     justify-content: flex-end;
     align-items: flex-end;
     a {
-        font-size: 1em;
+        font-size: 1.2em;
         margin-left: 2vw;
         color: #30454C;
         font-family: 'Titillium Web', sans-serif;
