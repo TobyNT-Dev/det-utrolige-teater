@@ -1,14 +1,19 @@
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
 @media only screen and (min-width: 600px) {
-  body, html {
+  #root {
     margin: 0 auto;
-    max-width: 85%;
     padding: 0;
+    width: 70%;
   }
 }
 @media only screen and (max-width: 600px) {
-  body, html {
+  #root {
     margin: 0 auto;
-    max-width: 100%;
     padding: 0;
+    width: 100%;
   }
 }

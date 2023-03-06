@@ -68,22 +68,6 @@ export const Login = () => {
     // Sets the Password input value, to the variable.
     setPassword(event.target.value)
   }
-  // Function for Log-Out.
-  const logOut = () => {
-    // Clears the username and password variables.
-    setUsername("")
-    setPassword("")
-    // Sets Logged in to false.
-    setLoggedIn(false)
-    // Hides the Login window.
-    setInitialized(false)
-    // Clears the user data from session storage.
-    sessionStorage.clear("user")
-    // Reloads the window to update login-based components.
-    console.log("Successfully logged out.")
-
-    window.location.reload()
-  }
   // Returns the JSX with the form.
   return (
     <>
@@ -108,11 +92,24 @@ export const Login = () => {
         <button type="submit">Log In</button>
         </form>
     </div></StyledLogin> : <></>}
-    {/* If loggedIn is not true, then display a Log In button. If it is true, display a Log Out button. */}
-    {!loggedIn ? <button className="nav-button" onClick={() => setInitialized(true)}>Log In</button> : <Link to="min-side">MIN SIDE</Link>}
+    {/* If loggedIn is not true, then display a Log In button. If it is true, display a Navigation link to "Min Side" Page. */}
+    {!loggedIn ? <StyledLoginButton onClick={() => setInitialized(true)}>LOGIN</StyledLoginButton> : <Link to="min-side">MIN SIDE</Link>}
   </>
 )
 }
+const StyledLoginButton = styled.button`
+cursor: pointer;
+background-color: #FFFFFF00;
+border: none;
+font-size: 1em;
+margin-left: 2vw;
+color: #30454C;
+font-family: 'Titillium Web', sans-serif;
+text-decoration: none;
+&:hover {
+    color: #D39D5B;
+}
+`
 
 // Styles for the StyledLogin styled component.
 const StyledLogin = styled.div`
