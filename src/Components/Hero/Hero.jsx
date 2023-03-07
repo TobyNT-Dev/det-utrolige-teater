@@ -1,35 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import AppService from '../Appservices/Appservice'
 
 export const Hero = () => {
   const [data, setData] = useState()
 
+
+  useEffect(() => {
   AppService.GetDetail("events", "4").then((response) => {
     setData(response.data.item)
   })
+},[])
   
   if (data) {
     // Convert the Start and stop dates to local date
-    const startDateStr = data.startdate;
-    const stopDateStr = data.stopdate;
-    const date1 = new Date(startDateStr);
-    const date2 = new Date(stopDateStr);
-    const options = { day: "numeric", month: "long" };
-
+    //Decides how the date should be formatted
+    const options = { day: "numeric", month: "long" }
     return (
       <>
-    {data ? <StyledHero>
+    <StyledHero>
       <div className="InfoContainer">
         <p>{data.stage_name.toUpperCase()}</p>
-        <p>{`${date1.toLocaleDateString("da-DK", options).toUpperCase()} - ${date2.toLocaleDateString("da-DK", options).toUpperCase()}`}</p>
+        <p>{`${new Date(data.startdate).toLocaleDateString("da-DK", options).toUpperCase()} - ${new Date(data.stopdate).toLocaleDateString("da-DK", options).toUpperCase()}`}</p>
         <h2>{data.title}</h2>
         <h3>{data.genre.toUpperCase()}</h3>
       </div>
       <div className="ImgContainer">
-        <img src={data.image_small} alt="Billede tilhørende forestillingen" />
+        <img src={data.image_medium} alt="Billede tilhørende forestillingen" />
       </div>
-    </StyledHero> : <></>}
+    </StyledHero>
     </>
   )
 }
@@ -37,7 +36,7 @@ export const Hero = () => {
 const StyledHero = styled.div`
 margin-top: 3vw;
 
-border: 1px #AD7A51 solid;
+border: 2px #AD7A51 solid;
 height: 23vw;
 display: grid;
 grid-template-columns: 1fr 3fr;

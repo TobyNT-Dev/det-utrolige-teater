@@ -19,7 +19,7 @@ export const MyPage = () => {
     {sessionStorage.getItem("user") !== null ? <div>
       <h1>Min side</h1>
       <button onClick={() => handleLogout()}>LOG OUT</button>
-    </div> : <div className="notLoggedIn"><h2>Log ind for at se din personlige side.</h2></div>}
+    </div> : <div className="notLoggedIn"><h2>404 Side ikke fundet</h2></div>}
     </>
   )
 }
