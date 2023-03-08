@@ -5,11 +5,17 @@ import AppService from '../Appservices/Appservice'
 
 export const EventDetails = () => {
     const [data, setData] = useState()
+    const [reviews, setReviews] = useState()
     const { id } = useParams()
     useEffect(() => {
-    AppService.GetDetail("events", id).then((response) => {
-        setData(response.data.item)
-    })
+        AppService.GetDetail("events", id).then((response) => {
+            setData(response.data.item)
+        })
+    }) 
+    useEffect(() => {
+        AppService.GetList(`reviews?event_id=${id}`).then((response) => {
+            setReviews(response.data.items)
+        })
     })
     //Decides how the date should be formatted
     const options = { day: "numeric", month: "long" }
@@ -34,12 +40,51 @@ export const EventDetails = () => {
               <p className="description">{data.description}</p>
               <p className="duration">{`Varighed ca. ${data.duration_minutes} minutter`}</p>
               <h3>MEDVIRKENDE</h3>
-
+              <div className="ActorsContainer">
+              {data && data.actors.map((item, idx) => {
+                  return (
+                      <div className="actors" key={idx}>
+                        <img src={item.image} alt={`${item.name}`} />
+                        <p>{item.name}</p>
+                    </div>
+                )
+            })}
+            </div>
+            <h3>Anmeldelser</h3>
+            {reviews && reviews.map((item, idx) => {
+                return (
+                    <div className="ReviewsContainer" key={idx}>
+                        <p>{`${item.num_stars}/5 Stjerner`}</p>
+                    </div>
+                )
+            })}
           </StyledDetails>
         )
     }
 }
 const StyledDetails = styled.main`
+border: 1px #AD7A51 solid;
+.ActorsContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 1.5em;
+    .actors {
+        text-align: center;
+        display: grid;
+        border: 1px #AD7A51 solid;
+        img {
+            width: 100%;
+        }
+        p {
+            font-family: "Titillium Web", sans-serif;
+            font-size: 1.2vw;
+            font-weight: 500;
+            color: #D39D5B;
+            margin: 0.5em;
+        }
+    }
+}
 h3 {
     font-family: "Titillium Web", sans-serif;
     font-weight: 600;
