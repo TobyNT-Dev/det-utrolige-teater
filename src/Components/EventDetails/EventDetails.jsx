@@ -24,18 +24,40 @@ export const EventDetails = () => {
                   <p>{data.stage_name}</p>
                   <p>{`${new Date(data.startdate).toLocaleDateString("da-DK", options).toUpperCase()} - ${new Date(data.stopdate).toLocaleDateString("da-DK", options).toUpperCase()}`}</p>
                   <h2>{data.title}</h2>
-                  <h3>{data.genre}</h3>
+                  <h3>{data.genre.toUpperCase()}</h3>
                 </div>
                 <div className="RightBox">
                   <p>{`BILLETPRIS: ${data.price} DKK`}</p>
                   <button className="buyTicket">KØB BILLET</button>
                 </div>
               </section>
+              <p className="description">{data.description}</p>
+              <p className="duration">{`Varighed ca. ${data.duration_minutes} minutter`}</p>
+              <h3>MEDVIRKENDE</h3>
+
           </StyledDetails>
         )
     }
 }
 const StyledDetails = styled.main`
+h3 {
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 600;
+    color: #707070;
+    font-size: 20pt;
+}
+.duration {
+    font-family: "Titillium Web", sans-serif;
+    font-size: 1.2vw;
+    font-weight: 500;
+    color: #D39D5B;
+}
+.description {
+    font-family: "Titillium Web", sans-serif;
+    font-size: 1.2vw;
+    font-weight: 500;
+    color: #D39D5B;
+}
 .SplitGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
