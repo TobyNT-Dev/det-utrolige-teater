@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import AppService from '../Appservices/Appservice'
 
@@ -27,6 +28,7 @@ export const Overview = () => {
             <option value="?dir=ASC">Sorter efter titel (A - Å)</option>
             <option value="?dir=DESC">Sorter efter titel (Å - A)</option>
         </select>
+        <h2>Oversigt</h2>
         {data && data.map((item, idx) => {
             return (
                 <StyledOverviewList key={idx}>
@@ -40,7 +42,7 @@ export const Overview = () => {
                         <p>{item.genre}</p>
                         <p>{`${new Date(item.startdate).toLocaleDateString("da-DK", options).toUpperCase()} - ${new Date(item.stopdate).toLocaleDateString("da-DK", options).toUpperCase()}`}</p>
                     </div>
-                    <button className="readMore">LÆS MERE</button>
+                    <Link to={`/${item.id}`}><button className="readMore">LÆS MERE</button></Link>
                     <button className="buyTicket">KØB BILLET</button>
                 </StyledOverviewList>
             )
@@ -52,10 +54,10 @@ const StyledOverview = styled.section`
 `
 const StyledOverviewList = styled.div`
 margin-bottom: 0.5em;
+margin-top: 1em;
 display: grid;
-grid-template-columns: 1fr 2fr 4fr 2fr 2fr;
+grid-template-columns: 1fr 2fr 4fr 1.5fr 1.5fr;
 border: 2px #AD7A51 solid;
-
 .ImgDiv {
     overflow: hidden;
     height: 5vw;
@@ -68,11 +70,13 @@ border: 2px #AD7A51 solid;
 .TitleDiv {
     height: 5vw;
     h3 {
-        font-family: "";
+        color: #D39D5B;
+        font-family: "Playfair Display";
     }
 }
 .InfoDiv {
-    
+    height: 5vw;
+    font-family: "Titillium Web";
 }
 
 button {
@@ -83,7 +87,9 @@ border: none;
 color: white;
 font-weight: 600;
 font-size: 12pt;
-width: 85%;
+width: 65%;
+height: 50%;
+margin-top: 12.5%;
 }
 .readMore {
     margin-right: 5%;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import AppService from '../Appservices/Appservice'
 
@@ -33,15 +34,15 @@ export const ThreeEvents = () => {
                     <p>{`${new Date(item.startdate).toLocaleDateString("da-DK", options).toUpperCase()} - ${new Date(item.stopdate).toLocaleDateString("da-DK", options).toUpperCase()}`}</p>
                     <h2>{item.title}</h2>
                     <h3>{item.genre.toUpperCase()}</h3>
-                    <button className="readMore">LÆS MERE</button>
+                    <Link to={`/${item.id}`}><button className="readMore">LÆS MERE</button></Link>
                     <button className="buyTicket">KØB BILLET</button>
                 </div>
             </StyledVerticalCards>
-        )
-      })}
+            )
+        })}
     </StyledCardBox>
-      <StyledRedirectButton onClick={() => handleNavigate()} className="seeAll">SE ALLE FORESTILLINGER</StyledRedirectButton>
-      </>
+    <StyledRedirectButton onClick={() => handleNavigate()} className="seeAll">SE ALLE FORESTILLINGER</StyledRedirectButton>
+    </>
   )
 }
 const StyledCardBox = styled.div`

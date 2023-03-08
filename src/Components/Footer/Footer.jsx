@@ -59,6 +59,7 @@ p {
 h3 {
   color: white;
   font-family: "Titillium Web", sans-serif;
+  margin: 0.2vw 0;
 }
 .socials {
   svg {
