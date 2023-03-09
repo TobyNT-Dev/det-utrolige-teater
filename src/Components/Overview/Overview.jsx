@@ -10,10 +10,9 @@ export const Overview = () => {
 
     useEffect(() =>  {
         AppService.GetList(`events${selected}`).then((response) => {
-            console.log(response.data.items)
             setData(response.data.items)
         })
-    },[])
+    })
 
     //Decides how the date should be formatted
     const options = { day: "numeric", month: "long" }
@@ -42,7 +41,7 @@ export const Overview = () => {
                         <p>{item.genre}</p>
                         <p>{`${new Date(item.startdate).toLocaleDateString("da-DK", options).toUpperCase()} - ${new Date(item.stopdate).toLocaleDateString("da-DK", options).toUpperCase()}`}</p>
                     </div>
-                    <Link to={`/${item.id}`}><button className="readMore">LÆS MERE</button></Link>
+                    <Link to={`/forestillinger-og-events/${item.id}`}><button className="readMore">LÆS MERE</button></Link>
                     <button className="buyTicket">KØB BILLET</button>
                 </StyledOverviewList>
             )
@@ -71,12 +70,12 @@ border: 2px #AD7A51 solid;
     height: 5vw;
     h3 {
         color: #D39D5B;
-        font-family: "Playfair Display";
+        font-family: "Playfair Display", sans-serif;
     }
 }
 .InfoDiv {
     height: 5vw;
-    font-family: "Titillium Web";
+    font-family: "Titillium Web", sans-serif;
 }
 
 button {

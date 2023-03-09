@@ -34,7 +34,7 @@ export const ThreeEvents = () => {
                     <p>{`${new Date(item.startdate).toLocaleDateString("da-DK", options).toUpperCase()} - ${new Date(item.stopdate).toLocaleDateString("da-DK", options).toUpperCase()}`}</p>
                     <h2>{item.title}</h2>
                     <h3>{item.genre.toUpperCase()}</h3>
-                    <Link to={`/${item.id}`}><button className="readMore">LÆS MERE</button></Link>
+                    <Link to={`/forestillinger-og-events/${item.id}`}><button className="readMore">LÆS MERE</button></Link>
                     <button className="buyTicket">KØB BILLET</button>
                 </div>
             </StyledVerticalCards>

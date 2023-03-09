@@ -18,7 +18,7 @@ export const AppRouter = () => {
             <Route path="/forestillinger-og-events" element={<Events />} />
             <Route path="/skuespillere" element={<Actors />} />
             <Route path="/min-side" element={<MyPage />} />
-            <Route path="/:id" element={<EventDetails />} />
+            <Route path="/forestillinger-og-events/:id" element={<EventDetails />} />
         </Routes>
         {/* shows the footer on every page */}
         <Footer />
