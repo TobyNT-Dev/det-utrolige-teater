@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import styled from 'styled-components'
 import AppService from '../Appservices/Appservice'
+import { BuyButton } from '../BuyButton/BuyButton'
 import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
 
 export const EventDetails = () => {
@@ -52,7 +53,7 @@ export const EventDetails = () => {
                 </div>
                 <div className="RightBox">
                   <p>{`BILLETPRIS: ${data.price} DKK`}</p>
-                  <button className="buyTicket">KØB BILLET</button>
+                  <BuyButton data={data} />
                 </div>
               </section>
               <p className="description">{data.description}</p>

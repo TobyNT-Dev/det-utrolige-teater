@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import AppService from '../Appservices/Appservice'
+import { BuyButton } from '../BuyButton/BuyButton'
+import { ReadMoreButton } from '../ReadMoreButton/ReadMoreButton'
 
 export const ThreeEvents = () => {
     const [data, setData] = useState()
@@ -34,8 +36,8 @@ export const ThreeEvents = () => {
                     <p>{`${new Date(item.startdate).toLocaleDateString("da-DK", options).toUpperCase()} - ${new Date(item.stopdate).toLocaleDateString("da-DK", options).toUpperCase()}`}</p>
                     <h2>{item.title}</h2>
                     <h3>{item.genre.toUpperCase()}</h3>
-                    <Link to={`/forestillinger-og-events/${item.id}`}><button className="readMore">LÆS MERE</button></Link>
-                    <button className="buyTicket">KØB BILLET</button>
+                    <ReadMoreButton data={item} />
+                    <BuyButton data={item} />
                 </div>
             </StyledVerticalCards>
             )

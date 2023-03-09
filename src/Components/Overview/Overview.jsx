@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import AppService from '../Appservices/Appservice'
+import { BuyButton } from '../BuyButton/BuyButton'
+import { ReadMoreButton } from '../ReadMoreButton/ReadMoreButton'
 
 export const Overview = () => {
     const [data, setData] = useState()
@@ -17,6 +18,7 @@ export const Overview = () => {
     //Decides how the date should be formatted
     const options = { day: "numeric", month: "long" }
 
+    if (data) {
   return (
     <StyledOverview>
         <select value={selected} onChange={(e) => setSelected(e.target.value)} name="options">
@@ -41,13 +43,14 @@ export const Overview = () => {
                         <p>{item.genre}</p>
                         <p>{`${new Date(item.startdate).toLocaleDateString("da-DK", options).toUpperCase()} - ${new Date(item.stopdate).toLocaleDateString("da-DK", options).toUpperCase()}`}</p>
                     </div>
-                    <Link to={`/forestillinger-og-events/${item.id}`}><button className="readMore">LÆS MERE</button></Link>
-                    <button className="buyTicket">KØB BILLET</button>
+                    <ReadMoreButton data={item} />
+                    <BuyButton data={item} />
                 </StyledOverviewList>
             )
         })}
     </StyledOverview>
   )
+}
 }
 const StyledOverview = styled.section`
 `
