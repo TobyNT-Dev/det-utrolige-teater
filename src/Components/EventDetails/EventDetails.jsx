@@ -205,7 +205,6 @@ h3 {
             font-weight: 600;
             font-size: 12pt;
             width: 25%;
-            background-color: #D39D5B;
             cursor: pointer;
         &:hover {
             background-color: #AD7A51;
