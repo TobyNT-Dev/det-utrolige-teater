@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import AppService from '../../Components/Appservices/Appservice';
 
@@ -6,10 +6,20 @@ export const MyPage = () => {
   // Im using useNavigate hook, to navigate to the home page after log out
   const navigate = useNavigate()
   const [favorites, setFavorites] = useState()
+  const [runEffect, setRunEffect] = useState(false)
 
-  AppService.GetList("favorites").then((response) => {
-    setFavorites(response.data.items)
-  })
+  useEffect(() => {
+    AppService.GetList("favorites").then((response) => {
+      setFavorites(response.data.items)
+    })
+  },[runEffect])
+
+  const handleDelFav = (event_id) => {
+    AppService.Delete("favorites", event_id).then((response) => {
+      console.log(event_id + " Removed!")
+      setRunEffect(state => !state)
+    })
+  }
 
   const handleLogout = () => {
     //clear the session storage, so the site knows that user is logged out
@@ -31,7 +41,8 @@ export const MyPage = () => {
           {favorites.map((item, idx) => {
             return (
               <div key={idx}>
-                <p>{`${item.title},${item.stage_name}`}</p>
+                <h4>FORESTILLING</h4> <h4>REDIGER</h4>
+                <p>{`${item.title}, ${item.stage_name}`}<span onClick={() => handleDelFav(item.event_id)}>✖</span></p> 
               </div>
             )
           })}
