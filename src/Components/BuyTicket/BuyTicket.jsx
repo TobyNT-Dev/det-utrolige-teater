@@ -108,17 +108,16 @@ export const BuyTicket = () => {
 
                             <input value={order.city} 
                             onChange={(e) => setOrder((state) => ({...state, city: e.target.value}))} required name="city" type="text" /></label>
-
                     </div>
                     <button type="submit">GODKEND BESTILLING</button>
                     <div className="seatsDiv">
                         {Lines && Lines.map((subItem, idx) => {
                             return(
                                 <div className={`row${subItem} rows`} key={idx}>{seats && seats.map((item, idx) => {
-                                    if (item.line == subItem) {
+                                    if (item.line === subItem) {
                                         return (
                                             <span id={`item-${item.id}`} className="item" ref={thisRef} onClick={() => {
-                                                if (item.is_reserved == 0) {
+                                                if (item.is_reserved === 0) {
                                                     handleAddSeat(item.id)
                                                 }
                                             }} style={{color: `rgba(255, 0, 0, ${item.is_reserved})`}} key={idx}>✕</span>
@@ -131,7 +130,7 @@ export const BuyTicket = () => {
                         <p>{res}</p>
                 </form> : <h3>Log ind for at købe en billet.</h3>}
         </div>
-    </StyledTicketSale> : <>{status == "Ok" ? <StyledSuccess className="success">Tak for din bestilling</StyledSuccess> : <h2>Der skete en fejl, prøv igen senere...</h2>}</>}
+    </StyledTicketSale> : <>{status === "Ok" ? <StyledSuccess className="success">Tak for din bestilling</StyledSuccess> : <h2>Der skete en fejl, prøv igen senere...</h2>}</>}
     </>
   )
 }
