@@ -1,7 +1,7 @@
 export default function AuthHeader() {
     const currentUser = sessionStorage.getItem("user") ? JSON.parse(sessionStorage.getItem("user")) : "";
      
-    // console.log(currentUser)
+    // checks if user is existing in sessionStorage
     if (currentUser && currentUser.access_token) {
   
       return {

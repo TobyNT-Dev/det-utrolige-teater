@@ -7,12 +7,20 @@ export const MyPage = () => {
   // Im using useNavigate hook, to navigate to the home page after log out
   const navigate = useNavigate()
   const [favorites, setFavorites] = useState()
+  const [orders, setOrders] = useState()
   const [runEffect, setRunEffect] = useState(false)
   const user = JSON.parse(sessionStorage.getItem("user"))
   console.log(user)
   useEffect(() => {
     AppService.GetList("favorites").then((response) => {
       setFavorites(response.data.items)
+    })
+  },[runEffect])
+  
+  useEffect(() => {
+    AppService.GetList("reservations").then((response) => {
+      setOrders(response.data.items)
+      console.log(response.data.items)
     })
   },[runEffect])
 
@@ -52,6 +60,17 @@ export const MyPage = () => {
             )
           })}
         </div> : <h3>Ingen Favoritter fundet...</h3>}
+        <h2>MINE RESERVATIONER</h2>
+        {orders && orders !== null ? <div>
+          {orders.map((item, idx) => {
+            return (
+              <StyledFavorites key={idx}>
+                {idx == 0 ? <p>DATO & TID<span>FORESTILLING</span><span>SCENE</span><span>ANTAL</span><span>PRIS</span><span>REDIGER</span></p> : <></>}
+                <p>{`${item.startdate}`}<span className="x" onClick={() => handleDelFav(item.event_id)}>✖</span></p> 
+              </StyledFavorites>
+            )
+          })}
+        </div> : <h3>Ingen reservationer fundet...</h3>}
       </div>
     </div> : <div className="notLoggedIn"><h2>404 Side ikke fundet</h2></div>}
     </StyledMyPage>
@@ -105,7 +124,7 @@ p {
   span {
     margin-left: auto;
     color: #707070;
-    font-size: 1.5em;
+    font-size: 1em;
   }
   .x {
     margin-left: auto;

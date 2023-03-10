@@ -79,4 +79,31 @@ grid-template-columns: 1fr 3fr;
     width: 100%;
   }
 }
+@media only screen and (max-width: 600px) {
+height: auto;
+display: grid;
+grid-template-columns: 1fr 2fr;
+.InfoContainer {
+  p {
+    font-size: 1.5em;
+    :nth-child(1) {
+    }
+    :nth-child(2) {
+    }
+  }
+  h2 {
+    font-size: 3em;
+  }
+  h3 {
+    font-size: 2em;
+  }
+}
+
+.ImgContainer {
+  img {
+    width: 40em;
+  }
+}
+
+}
 `

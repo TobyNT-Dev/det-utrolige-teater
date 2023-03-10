@@ -140,4 +140,29 @@ grid-template-rows: 2fr auto;
     object-fit: cover;
   }
 }
+@media only screen and (max-width: 600px) {
+.InfoContainer {
+  button {
+    }
+  p {
+    font-size: 1.5em;
+    :nth-child(1) {
+    }
+    :nth-child(2) {
+    }
+  }
+  h2 {
+    font-size: 3em;
+  }
+  h3 {
+    font-size: 1.5em;
+  }
+}
+
+.ImgContainer {
+  img {
+  }
+}
+
+}
 `
