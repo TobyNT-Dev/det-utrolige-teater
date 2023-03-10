@@ -10,7 +10,7 @@ export const EventDetails = () => {
     const [reviews, setReviews] = useState()
     const { id } = useParams()
     const [formRes, setFormRes] = useState()
-    const [formData, setFormData] = useState({subject: "", comment: "", num_stars: "1", event_id: `${id}`})
+    const [formData, setFormData] = useState({subject: "", comment: "", num_stars: "", event_id: `${id}`})
     useEffect(() => {
         AppService.GetDetail("events", id).then((response) => {
             setData(response.data.item)
@@ -80,6 +80,7 @@ export const EventDetails = () => {
                     </div>
                 )
             })}
+            <h3 className="reviewHeader">Skriv en anmeldelse</h3>
             <div className="PostReview">
                 {sessionStorage.getItem("user") !== null ? <form onSubmit={(e) => {
                     e.preventDefault()
@@ -87,11 +88,31 @@ export const EventDetails = () => {
                         handleSubmit()
                     }
                 }}>
-                    <div>
-                        <label htmlFor="subject">Titel: <input value={formData.subject} onChange={(e) => setFormData((state) => ({...state, subject: e.target.value}))} required name="subject" type="text" /></label>
-                        <label htmlFor="comment">Andmeldelse: <textarea value={formData.comment}  onChange={(e) => setFormData((state) => ({...state, comment: e.target.value}))} required name="comment" type="text" /></label>
+                    <div className="innerbox">
+                        <label>
+                        <input type="radio" name="rating" value="1" required onChange={(e) => setFormData((state) => ({...state, num_stars: e.target.value}))} />
+                        1 Stjerne
+                        </label>
+                        <label>
+                            <input type="radio" name="rating" value="2" required onChange={(e) => setFormData((state) => ({...state, num_stars: e.target.value}))} />
+                            2 Stjerner
+                        </label>
+                        <label>
+                            <input type="radio" name="rating" value="3" required onChange={(e) => setFormData((state) => ({...state, num_stars: e.target.value}))} />
+                            3 Stjerner
+                        </label>
+                        <label>
+                            <input type="radio" name="rating" value="4" required onChange={(e) => setFormData((state) => ({...state, num_stars: e.target.value}))} />
+                            4 Stjerner
+                        </label>
+                        <label>
+                            <input type="radio" name="rating" value="5" required onChange={(e) => setFormData((state) => ({...state, num_stars: e.target.value}))} />
+                            5 Stjerner
+                        </label>
+                        <label htmlFor="subject"><input placeholder="Emne" value={formData.subject} onChange={(e) => setFormData((state) => ({...state, subject: e.target.value}))} required name="subject" type="text" /></label>
+                        <label htmlFor="comment"><textarea placeholder="Kommentar" value={formData.comment}  onChange={(e) => setFormData((state) => ({...state, comment: e.target.value}))} required name="comment" type="text" /></label>
                     </div>
-                    <button onClick={() => handleResponse()}>Send</button>
+                <button className="send" onClick={() => handleResponse()}>SEND</button>
                 </form> : <h3>Log ind for at sende en anmeldelse.</h3>}
             </div>
           </StyledDetails>
@@ -104,6 +125,9 @@ border: 1px #AD7A51 solid;
 .ReviewsContainer {
     margin: 1.5em 0;
     p {
+        font-family: "Titillium Web", sans-serif;
+        font-weight: 600;
+        color: #D39D5B;
         margin: 0;
         &:nth-child(2) {
             color: #707070;
@@ -125,6 +149,59 @@ border: 1px #AD7A51 solid;
             font-weight: 600;
         }
     }
+}
+.reviewHeader {
+    color: white;
+    background-color: #AD7A51;
+    margin-bottom: 0;
+}
+.PostReview {
+    background-color: #AD7A51;
+    .innerbox {
+        display: inline-block;
+        width: 80%;
+        margin-right: 1em;
+        label {
+            font-family: "Titillium Web", sans-serif;
+            font-weight: 600;
+            color: white;
+            &:nth-child(6) {
+                input {
+                    width: 100%;
+                    height: 2em;
+                    border: none;
+                    display: block;
+                    margin: 0.5em;
+                    border-radius: 3px;
+                }
+            }
+            &:nth-child(7) {
+                textarea {
+                border-radius: 3px;
+                border: none;
+                width: 100%;
+                resize: none;
+                display: block;
+                height: 5em;
+                margin: 0.5em;
+            }
+        }
+    }
+}
+.send {
+    border-radius: 3px;
+    display: inline-block;
+    background-color: #D39D5B;
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 600;
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 0.5em;
+}
+
 }
 .ActorsContainer {
     width: 100%;
