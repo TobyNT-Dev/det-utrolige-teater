@@ -25,26 +25,23 @@ export const BuyTicket = () => {
     },[id])
     const handleSubmit = () => {
         if (seatsArr.length > 0) {
-            console.log(order)
+            const payload = {
+                city: order.city,
+                email: order.email,
+                event_id: order.event_id,
+                firstname: order.firstname,
+                address: `${order.housenumber}, ${order.streetname}`,
+                lastname: order.lastname,
+                seats: `${seatsArr}`,
+                zipcode: order.zipcode
+            }
+            AppService.Create("reservations", payload).then((response) => {
+                setStatus(response.data.status)
+            })
         }
         else if (seatsArr.length === 0) {
             setRes("Vælg Venligst mindst 1 billet plads.")
         }
-    }
-    const handleResponse = () => {
-        const payload = {
-            city: order.city,
-            email: order.email,
-            event_id: order.event_id,
-            firstname: order.firstname,
-            address: `${order.housenumber}, ${order.streetname}`,
-            lastname: order.lastname,
-            seats: order.seats,
-            zipcode: order.zipcode
-        }
-        AppService.Create("reservations", payload).then((response) => {
-            setStatus(response.data.status)
-        })
     }
     
     //checks if the id of the clicked seat is allready clicked or not, if it is not, then add to array, for order
@@ -113,7 +110,7 @@ export const BuyTicket = () => {
                             onChange={(e) => setOrder((state) => ({...state, city: e.target.value}))} required name="city" type="text" /></label>
 
                     </div>
-                    <button onClick={() => handleResponse()}>GODKEND BESTILLING</button>
+                    <button type="submit">GODKEND BESTILLING</button>
                     <div className="seatsDiv">
                         {Lines && Lines.map((subItem, idx) => {
                             return(

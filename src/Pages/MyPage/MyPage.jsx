@@ -76,10 +76,11 @@ export const MyPage = () => {
               <StyledFavorites key={idx}>
                 {idx === 0 ? <p>DATO & TID<span>FORESTILLING</span><span>SCENE</span><span>ANTAL</span><span>PRIS</span><span>REDIGER</span></p> : <></>}
                 { events && events.map((subItem, idx) => {
-                  if (subItem.id === item.event_id)
-                  return (
-                    <p key={idx}>{`${subItem.startdate}, ${subItem.starttime}`}<span>{subItem.title}</span><span>{subItem.stage_name}</span><span>{`...`}</span><span>{subItem.price}</span><span className="x" onClick={() => handleDelEvent(item.id)}>✖</span></p>
-                  )
+                  if (subItem.id === item.event_id) {
+                    return (
+                      <p key={idx}>{`${subItem.startdate}, ${subItem.starttime}`}<span>{subItem.title}</span><span>{subItem.stage_name}</span><span>{`${item}`}</span><span>{subItem.price}</span><span className="x" onClick={() => handleDelEvent(item.id)}>✖</span></p>
+                      )
+                    }
                 })}
               </StyledFavorites>
             )
