@@ -140,7 +140,7 @@ const StyledSuccess = styled.h1`
 text-align: center;
 font-family: "Playfair Display", sans-serif;
 color: #D39D5B;
-margin: 2em 0;
+margin: 2em 0 50vh 0;
 `
 const StyledTicketSale = styled.div`
 display: grid;
