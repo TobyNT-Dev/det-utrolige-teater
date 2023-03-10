@@ -10,6 +10,7 @@ export const BuyTicket = () => {
     const [res, setRes] = useState("")
     const thisRef = useRef();
     const [seats, setSeats] = useState()
+    const [status, setStatus] = useState("")
     const userEmail = JSON.parse(sessionStorage.getItem("user"))
     const [order, setOrder] = useState({ event_id: `${id}`, firstname: "", lastname: "", housenumber: "", streetname: "", zipcode: "", city: "", email: `${userEmail?.user.email}`, seats: []})
     useEffect(() => {
@@ -26,7 +27,7 @@ export const BuyTicket = () => {
         if (seatsArr.length > 0) {
             console.log(order)
         }
-        else if (seatsArr.length == 0) {
+        else if (seatsArr.length === 0) {
             setRes("Vælg Venligst mindst 1 billet plads.")
         }
     }
@@ -42,7 +43,7 @@ export const BuyTicket = () => {
             zipcode: order.zipcode
         }
         AppService.Create("reservations", payload).then((response) => {
-            console.log(response)
+            setStatus(response.data.status)
         })
     }
     
@@ -79,18 +80,19 @@ export const BuyTicket = () => {
     if (data && seats) {
         const Lines = [...new Set(seats.map(item => item.line))]
         return (
-    <StyledTicketSale>
-        <div className="imgDiv"><img src={data.image_medium}/></div>
+            <>
+    {!status ? <StyledTicketSale>
+        <div className="imgDiv"><img src={data.image_medium} alt="event"/></div>
         <div className="formDiv">
             <h2>Køb billet</h2>
             <h3>{data.title}</h3>
             <h4>{`${data.stage_name}, ${data.startdate}`}</h4>
             {sessionStorage.getItem("user") !== null ? <form onSubmit={(e) => {
-                    e.preventDefault()
-                    if (sessionStorage.getItem("user") !== null) {
-                        handleSubmit()
-                    }
-                }}>
+                e.preventDefault()
+                if (sessionStorage.getItem("user") !== null) {
+                    handleSubmit()
+                }
+            }}>
                     <div className="Inputs">
                         <label htmlFor="firstname">FORNAVN <input value={order.firstname} 
                         onChange={(e) => setOrder((state) => ({...state, firstname: e.target.value}))} required name="firstname" type="text" /></label>
@@ -123,19 +125,26 @@ export const BuyTicket = () => {
                                                     handleAddSeat(item.id)
                                                 }
                                             }} style={{color: `rgba(255, 0, 0, ${item.is_reserved})`}} key={idx}>✕</span>
-                                        )
-                                    }
-                                })}</div>
-                            )
-                        })}
+                                            )
+                                        }
+                                    })}</div>
+                                    )
+                                })}
                         </div>
                         <p>{res}</p>
                 </form> : <h3>Log ind for at købe en billet.</h3>}
         </div>
-    </StyledTicketSale>
+    </StyledTicketSale> : <>{status == "Ok" ? <StyledSuccess className="success">Tak for din bestilling</StyledSuccess> : <h2>Der skete en fejl, prøv igen senere...</h2>}</>}
+    </>
   )
 }
 }
+const StyledSuccess = styled.h1`
+text-align: center;
+font-family: "Playfair Display", sans-serif;
+color: #D39D5B;
+margin: 2em 0;
+`
 const StyledTicketSale = styled.div`
 display: grid;
 grid-template-columns: 30% 70%;

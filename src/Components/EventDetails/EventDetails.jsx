@@ -9,7 +9,7 @@ export const EventDetails = () => {
     const [data, setData] = useState()
     const [reviews, setReviews] = useState()
     const { id } = useParams()
-    const [formRes, setFormRes] = useState()
+    const [formRes, setFormRes] = useState("")
     const [formData, setFormData] = useState({subject: "", comment: "", num_stars: "", event_id: `${id}`})
     useEffect(() => {
         AppService.GetDetail("events", id).then((response) => {
@@ -20,20 +20,18 @@ export const EventDetails = () => {
         AppService.GetList(`reviews?event_id=${id}`).then((response) => {
             setReviews(response.data.items)
         })
-    },[id])
+    },[id, formRes])
     //Handles the post request for the api
     const handleSubmit = () => {
         AppService.Create("reviews", formData).then((response) => {
             setFormRes(response.data.status)
+            if (response.data.status === "Ok") {
+                setFormRes("Ok! Din anmeldelse blev sendt!")
+            }
+            else if (response.data.status !== "Ok") {
+                setFormRes("Fejl. Prøv igen senere...")
+            }
         })
-    }
-    const handleResponse = () => {
-        if (formRes === "Ok") {
-            setFormRes("Ok! Din anmeldelse blev sendt!")
-        }
-        if (formRes !== "Ok") {
-            setFormRes("Fejl. Prøv igen senere...")
-        }
     }
     //Decides how the date should be formatted
     const options = { day: "numeric", month: "long" }
@@ -81,7 +79,7 @@ export const EventDetails = () => {
                 )
             })}
             <h3 className="reviewHeader">Skriv en anmeldelse</h3>
-            <div className="PostReview">
+            {formRes === "" ? <div className="PostReview">
                 {sessionStorage.getItem("user") !== null ? <form onSubmit={(e) => {
                     e.preventDefault()
                     if (sessionStorage.getItem("user") !== null) {
@@ -112,16 +110,18 @@ export const EventDetails = () => {
                         <label htmlFor="subject"><input placeholder="Emne" value={formData.subject} onChange={(e) => setFormData((state) => ({...state, subject: e.target.value}))} required name="subject" type="text" /></label>
                         <label htmlFor="comment"><textarea placeholder="Kommentar" value={formData.comment}  onChange={(e) => setFormData((state) => ({...state, comment: e.target.value}))} required name="comment" type="text" /></label>
                     </div>
-                <button className="send" onClick={() => handleResponse()}>SEND</button>
-                </form> : <h3>Log ind for at sende en anmeldelse.</h3>}
-            </div>
+                  <button className="send" type="submit">SEND</button>
+                </form> : <h3 className="loginReq">Log ind for at sende en anmeldelse.</h3>}
+            </div> : <h2>{formRes}</h2> }
           </StyledDetails>
         )
     }
 }
 const StyledDetails = styled.main`
 border: 1px #AD7A51 solid;
-
+.loginReq {
+    color: white;
+}
 .ReviewsContainer {
     margin: 1.5em 0;
     p {

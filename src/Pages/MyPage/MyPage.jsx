@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { json, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import AppService from '../../Components/Appservices/Appservice';
 
@@ -54,7 +54,7 @@ export const MyPage = () => {
           {favorites.map((item, idx) => {
             return (
               <StyledFavorites key={idx}>
-                {idx == 0 ? <p>FORESTILLING<span>REDIGER</span></p> : <></>}
+                {idx === 0 ? <p>FORESTILLING<span>REDIGER</span></p> : <></>}
                 <p>{`${item.title.toUpperCase()}, ${item.stage_name.toUpperCase()}`}<span className="x" onClick={() => handleDelFav(item.event_id)}>✖</span></p> 
               </StyledFavorites>
             )
@@ -65,7 +65,7 @@ export const MyPage = () => {
           {orders.map((item, idx) => {
             return (
               <StyledFavorites key={idx}>
-                {idx == 0 ? <p>DATO & TID<span>FORESTILLING</span><span>SCENE</span><span>ANTAL</span><span>PRIS</span><span>REDIGER</span></p> : <></>}
+                {idx === 0 ? <p>DATO & TID<span>FORESTILLING</span><span>SCENE</span><span>ANTAL</span><span>PRIS</span><span>REDIGER</span></p> : <></>}
                 <p>{`${item.startdate}`}<span className="x" onClick={() => handleDelFav(item.event_id)}>✖</span></p> 
               </StyledFavorites>
             )

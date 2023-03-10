@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import AppService from '../Appservices/Appservice'
 import { BuyButton } from '../BuyButton/BuyButton'
