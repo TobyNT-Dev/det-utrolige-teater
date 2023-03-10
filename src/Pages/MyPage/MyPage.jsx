@@ -8,25 +8,34 @@ export const MyPage = () => {
   const navigate = useNavigate()
   const [favorites, setFavorites] = useState()
   const [orders, setOrders] = useState()
+  const [events, setEvents] = useState()
   const [runEffect, setRunEffect] = useState(false)
   const user = JSON.parse(sessionStorage.getItem("user"))
-  console.log(user)
   useEffect(() => {
     AppService.GetList("favorites").then((response) => {
       setFavorites(response.data.items)
     })
   },[runEffect])
+
+  useEffect(() => {
+    AppService.GetList("events").then((response) => {
+      setEvents(response.data.items)
+    })
+  })
   
   useEffect(() => {
     AppService.GetList("reservations").then((response) => {
       setOrders(response.data.items)
-      console.log(response.data.items)
     })
   },[runEffect])
 
   const handleDelFav = (event_id) => {
     AppService.Delete("favorites", event_id).then((response) => {
-      console.log(event_id + " Removed!")
+      setRunEffect(state => !state)
+    })
+  }
+  const handleDelEvent = (id) => {
+    AppService.Delete("reservations", id).then((response) => {
       setRunEffect(state => !state)
     })
   }
@@ -59,18 +68,23 @@ export const MyPage = () => {
               </StyledFavorites>
             )
           })}
-        </div> : <h3>Ingen Favoritter fundet...</h3>}
+        </div> : <h3>Ingen Favoritter fundet.</h3>}
         <h2>MINE RESERVATIONER</h2>
         {orders && orders !== null ? <div>
           {orders.map((item, idx) => {
             return (
               <StyledFavorites key={idx}>
                 {idx === 0 ? <p>DATO & TID<span>FORESTILLING</span><span>SCENE</span><span>ANTAL</span><span>PRIS</span><span>REDIGER</span></p> : <></>}
-                <p>{`${item.startdate}`}<span className="x" onClick={() => handleDelFav(item.event_id)}>✖</span></p> 
+                { events && events.map((subItem, idx) => {
+                  if (subItem.id === item.event_id)
+                  return (
+                    <p key={idx}>{`${subItem.startdate}, ${subItem.starttime}`}<span>{subItem.title}</span><span>{subItem.stage_name}</span><span>{`...`}</span><span>{subItem.price}</span><span className="x" onClick={() => handleDelEvent(item.id)}>✖</span></p>
+                  )
+                })}
               </StyledFavorites>
             )
           })}
-        </div> : <h3>Ingen reservationer fundet...</h3>}
+        </div> : <h3>Ingen reservationer fundet.</h3>}
       </div>
     </div> : <div className="notLoggedIn"><h2>404 Side ikke fundet</h2></div>}
     </StyledMyPage>
@@ -79,6 +93,10 @@ export const MyPage = () => {
 const StyledMyPage = styled.div`
 border: 1px #AD7A51 solid;
 padding: 0.5em;
+h3 {
+  font-family: "Playfair Display", sans-serif;
+  color: #D39D5B;
+}
 .logout {
   margin-top: -6vw;
   right: 8vw;

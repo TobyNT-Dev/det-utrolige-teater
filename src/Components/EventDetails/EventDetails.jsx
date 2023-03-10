@@ -112,7 +112,7 @@ export const EventDetails = () => {
                     </div>
                   <button className="send" type="submit">SEND</button>
                 </form> : <h3 className="loginReq">Log ind for at sende en anmeldelse.</h3>}
-            </div> : <h2>{formRes}</h2> }
+            </div> : <h2 className="formRes">{formRes}</h2> }
           </StyledDetails>
         )
     }
@@ -121,6 +121,11 @@ const StyledDetails = styled.main`
 border: 1px #AD7A51 solid;
 .loginReq {
     color: white;
+}
+.formRes {
+    color: #D39D5B;
+    font-family: "Titillium Web", sans-serif;
+    margin: 1.5em 0;
 }
 .ReviewsContainer {
     margin: 1.5em 0;
