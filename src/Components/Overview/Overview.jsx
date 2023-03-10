@@ -79,6 +79,10 @@ border: 2px #AD7A51 solid;
 .InfoDiv {
     height: 5vw;
     font-family: "Titillium Web", sans-serif;
+    p {
+        font-size: 1.2vw;
+        margin: 0.5em;
+    }
 }
 
 button {
@@ -106,5 +110,50 @@ margin-top: 12.5%;
     &:hover {
         background-color: #AD7A51;
     }
+}
+@media only screen and (max-width: 600px) {
+    margin-bottom: 0.5em;
+margin-top: 1em;
+display: grid;
+grid-template-columns: 1fr 2fr 4fr 2fr 2fr;
+border: 2px #AD7A51 solid;
+.ImgDiv {
+    overflow: hidden;
+    height: 5vw;
+    border: 0.3vw #AD7A51 solid;
+    aspect-ratio: 1/1;
+    img {
+        height: 5vw;
+    }
+}
+.TitleDiv {
+    height: 5vw;
+    h3 {
+        color: #D39D5B;
+        font-family: "Playfair Display", sans-serif;
+    }
+}
+.InfoDiv {
+    height: 5vw;
+    font-family: "Titillium Web", sans-serif;
+    p {
+        font-size: 1em;
+        margin: 0;
+    }
+}
+
+button {
+background-color: #AD7A51;
+font-family: "Titillium Web", sans-serif;
+padding: 0.5em;
+border: none;
+color: white;
+font-weight: 600;
+font-size: 12pt;
+width: 65%;
+height: 50%;
+margin-top: 12.5%;
+}
+
 }
 `

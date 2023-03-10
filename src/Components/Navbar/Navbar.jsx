@@ -24,7 +24,7 @@ export const Navbar = () => {
             <Login />
         </div>
         <FontAwesomeIcon className="MobileIcon" icon={faBars} onClick={() => extendBurger()} />
-        {!onOff ? <div className="LinksMobile">
+        {onOff ? <div className="LinksMobile">
             <Link to="/">FORSIDE</Link>
             <Link to="/forestillinger-og-events">FORESTILLINGER & EVENTS</Link>
             <Link to="/skuespillere">SKUESPILLERE</Link>
@@ -104,6 +104,7 @@ const StyledNav = styled.nav`
     .LinksMobile {
         position: absolute;
         right: 1vw;
+        background-color: #fff;
         a {
             display: block;
             font-size: 1.2em;

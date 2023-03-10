@@ -115,7 +115,7 @@ const StyledLoginButton = styled.button`
   cursor: pointer;
   background-color: #FFFFFF00;
   border: none;
-  font-size: 1.5vw;
+  font-size: 1.2em;
   margin-left: 0vw;
   color: #30454C;
   font-family: 'Titillium Web', sans-serif;

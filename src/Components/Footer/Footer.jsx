@@ -71,4 +71,13 @@ h3 {
     }
   }
 }
+@media only screen and (max-width: 600px) {
+grid-template-columns: 1fr 1fr;
+p {
+  font-size: 1.5em;
+}
+h3 {
+  font-size: 1.8em;
+}
+}
 `
